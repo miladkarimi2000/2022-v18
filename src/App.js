@@ -6,6 +6,7 @@ import './App.css';
 class App extends Component {
 
   constructor() {
+    console.log('constructor App');
     super();
     this.state = {
       monsters: [],
@@ -13,7 +14,10 @@ class App extends Component {
     }
   }
 
+  componentWillMount() { console.log('componentWillMount App'); }
+
   componentDidMount() {
+    console.log('componentDidMount App');
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
       .then(users => this.setState(
@@ -21,19 +25,22 @@ class App extends Component {
           return {
             monsters: users
           }
-        },
-        () => {
-          console.log(this.state)
         }
       ));
   }
 
+  componentWillReceiveProps() { console.log('componentWillReceiveProps App'); }
+  componentWillUpdate() { console.log('componentWillUpdate App'); }
+  componentDidUpdate() { console.log('componentDidUpdate App'); }
+
   onSearchChange = event => {
+    console.log('onSearchChange');
     const searchField = event.target.value.toLowerCase();
     this.setState(() => ({ searchField }));
   }
 
   render() {
+    console.log('render App');
 
     const { monsters, searchField } = this.state;
     const { onSearchChange } = this;
